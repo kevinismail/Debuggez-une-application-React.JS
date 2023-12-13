@@ -11,10 +11,13 @@ const Slider = () => {
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
   const nextCard = () => {
+    if (byDateDesc !== undefined) { 
     setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
+      () => setIndex(index < byDateDesc.length -1 ? index + 1 : 0),
+      // ici ajout d'un -1 pour ne pas dépasser la limite du tableau
       5000
     );
+    }
   };
   useEffect(() => {
     nextCard();
@@ -22,9 +25,8 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+          <div key={event.title}>
           <div
-            key={event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -45,12 +47,14 @@ const Slider = () => {
                   key={`${event.id}`}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx}
+                  //readOnly
+                  onChange={()=>null}
                 />
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
