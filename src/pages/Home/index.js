@@ -14,16 +14,17 @@ import ModalEvent from "../../containers/ModalEvent";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  //utiliser les data pour avoir la dernière prestation
-  const {data, error} = useData()
-  //trouver la dernieère image de data
+  // Obtenez la dernière prestation à partir des données
+  const { data, error } = useData();
+  // recuperer la dernier image du data
   const last =
-    data && data.events && data.events.length > 0 
-    ? data.events[data.events.length - 1]
-    : null;
+    data && data.events && data.events.length > 0
+      ? data.events[data.events.length - 1]
+      : null;
 
 
-  return <>
+  return (
+  <>
     <header>
       <Menu />
     </header>
@@ -34,7 +35,7 @@ const Page = () => {
       <section className="ServicesContainer" id="nos-services">
         <h2 className="Title">
           Nos services
-          </h2>
+        </h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
           <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
@@ -62,11 +63,11 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
-      <section className="EventsContainer" id="nos-realisations">
+      <section className="EventsContainer" id="nos-realisations" >
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
-      <section className="PeoplesContainer" id="notre-equipe">
+      <section className="PeoplesContainer" id="notre-equipe" >
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
@@ -125,29 +126,43 @@ const Page = () => {
       </div>
     </main>
     <footer className="row">
+       {/* Affichez les détails de la dernière prestation****** */}
       <div className="col presta">
-        <h3>Notre dernière prestation</h3>
+        <h3>Notre derniére prestation</h3>
+        {/* Utilisez le composant EventCard pour afficher les détails de la prestation ******* */}
         {last && (
-          <Modal Content={< ModalEvent event={last} />}>
-            {({setIsOpened}) => (
-              <EventCard //
-              onClick={() => setIsOpened(tre)}
+        <Modal Content={< ModalEvent event={last} />}>
+          {({ setIsOpened }) => (
+            <EventCard
+              onClick={() => setIsOpened(true)}
               imageSrc={last?.cover}
               title={last?.title}
               date={new Date(last?.date)}
               label={last?.type}
-              />
-            )}
-            
-          </Modal>
-        )}
-          { /*<EventCard
+            />
+          )}
+        </Modal>
+              )}
+    
+          {error && <div>Une erreur est survenue</div>}
+        
+        {/* {last && (
+            <EventCard
+              imageSrc={last.cover}
+              imageAlt={last.description}
+              title={last.title}
+              date={new Date(last.date)}
+              small
+              label={last.type}
+            />
+          )} */}
+        {/* <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
           label="boom"
-         />*/} 
+        /> */}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
@@ -180,6 +195,7 @@ const Page = () => {
       </div>
     </footer>
   </>
+  )
 }
 
 export default Page;
