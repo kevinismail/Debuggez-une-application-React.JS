@@ -29,16 +29,23 @@ describe("When Form is created", () => {
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
+  it("a list of events is displayed", async()=> {
     // to implement
+    render(<Home />);
+    await screen.findByText("Conférence");
   })
-  it("a list a people is displayed", () => {
-    // to implement
+  it("a list of people is displayed", async() => {
+    render(<Home />);
+    await screen.findByText("Directeur");
   })
-  it("a footer is displayed", () => {
-    // to implement
+  it("a footer is displayed", async() => {
+    render(<Home />);
+    await screen.findByText("Contactez-nous");
   })
-  it("an event card, with the last event, is displayed", () => {
+  it("an event card, with the last event, is displayed", async () => {
     // to implement
+    render(<Home />);
+   await screen.findByText("mars")
   })
 });
+
