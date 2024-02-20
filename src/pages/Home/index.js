@@ -14,13 +14,14 @@ import ModalEvent from "../../containers/ModalEvent";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  // Obtenez la dernière prestation à partir des données
-  const { data, error } = useData();
-  // recuperer la dernier image du data
-  const last =
-    data && data.events && data.events.length > 0
-      ? data.events[data.events.length - 1]
-      : null;
+// Obtenez la dernière prestation à partir des données
+const { data, error } = useData();
+
+// Trier les événements par date en ordre décroissant
+const sortedEvents = data?.events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+// Récupérer la dernière prestation (le premier élément du tableau trié)
+const last = sortedEvents && sortedEvents.length >  0 ? sortedEvents[0] : null;
 
 
   return (
@@ -54,7 +55,7 @@ const Page = () => {
             et faire de cet évènement un succès
           </ServiceCard>
           <ServiceCard imageSrc="/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png">
-            <h3>Experience digitale</h3>
+            <h3>Expérience digitale</h3>
             Notre agence experte en contenus immersifs offre des services de
             conseil aux entreprises, pour l’utilisation de la réalité virtuelle,
             de la réalité augmentée et de la réalité mixte de l’animation
@@ -128,7 +129,7 @@ const Page = () => {
     <footer className="row">
        {/* Affichez les détails de la dernière prestation****** */}
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
+        <h3>Notre dernière prestation</h3>
         {/* Utilisez le composant EventCard pour afficher les détails de la prestation ******* */}
         {last && (
         <Modal Content={< ModalEvent event={last} />}>
