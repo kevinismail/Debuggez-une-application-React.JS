@@ -10,11 +10,22 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
+import ModalEvent from "../../containers/ModalEvent";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
-  return <>
+// Obtenez la dernière prestation à partir des données
+const { data, error } = useData();
+
+// Trier les événements par date en ordre décroissant
+const sortedEvents = data?.events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+// Récupérer la dernière prestation (le premier élément du tableau trié)
+const last = sortedEvents && sortedEvents.length >  0 ? sortedEvents[0] : null;
+
+
+  return (
+  <>
     <header>
       <Menu />
     </header>
@@ -22,8 +33,10 @@ const Page = () => {
       <section className="SliderContainer">
         <Slider />
       </section>
-      <section className="ServicesContainer">
-        <h2 className="Title">Nos services</h2>
+      <section className="ServicesContainer" id="nos-services">
+        <h2 className="Title">
+          Nos services
+        </h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
           <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
@@ -42,7 +55,7 @@ const Page = () => {
             et faire de cet évènement un succès
           </ServiceCard>
           <ServiceCard imageSrc="/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png">
-            <h3>Experience digitale</h3>
+            <h3>Expérience digitale</h3>
             Notre agence experte en contenus immersifs offre des services de
             conseil aux entreprises, pour l’utilisation de la réalité virtuelle,
             de la réalité augmentée et de la réalité mixte de l’animation
@@ -51,11 +64,11 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
-      <section className="EventsContainer">
+      <section className="EventsContainer" id="nos-realisations" >
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
-      <section className="PeoplesContainer">
+      <section className="PeoplesContainer" id="notre-equipe" >
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
@@ -114,15 +127,43 @@ const Page = () => {
       </div>
     </main>
     <footer className="row">
+       {/* Affichez les détails de la dernière prestation****** */}
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
-        <EventCard
+        <h3>Notre dernière prestation</h3>
+        {/* Utilisez le composant EventCard pour afficher les détails de la prestation ******* */}
+        {last && (
+        <Modal Content={< ModalEvent event={last} />}>
+          {({ setIsOpened }) => (
+            <EventCard
+              onClick={() => setIsOpened(true)}
+              imageSrc={last?.cover}
+              title={last?.title}
+              date={new Date(last?.date)}
+              label={last?.type}
+            />
+          )}
+        </Modal>
+              )}
+    
+          {error && <div>Une erreur est survenue</div>}
+        
+        {/* {last && (
+            <EventCard
+              imageSrc={last.cover}
+              imageAlt={last.description}
+              title={last.title}
+              date={new Date(last.date)}
+              small
+              label={last.type}
+            />
+          )} */}
+        {/* <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
           label="boom"
-        />
+        /> */}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
@@ -155,6 +196,7 @@ const Page = () => {
       </div>
     </footer>
   </>
+  )
 }
 
 export default Page;

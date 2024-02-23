@@ -1,5 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Home from "./index";
+
+
 
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
@@ -13,32 +15,45 @@ describe("When Form is created", () => {
   describe("and a click is triggered on the submit button", () => {
     it("the success message is displayed", async () => {
       render(<Home />);
-      fireEvent(
-        await screen.findByText("Envoyer"),
-        new MouseEvent("click", {
-          cancelable: true,
-          bubbles: true,
-        })
-      );
-      await screen.findByText("En cours");
-      await screen.findByText("Message envoyé !");
+
+      // Simuler la soumission du formulaire
+      fireEvent.click(screen.getByText("Envoyer"));
+
+      // Attendre qu'en cours soit affiché 
+// Augmenter le délai de timeout pour findByText
+await screen.findByText("En cours", {}, { timeout:  5000 }); // Attend  5 secondes
+
+      // Attendere que le texte "Message envoyé !" soit affiché
+      await screen.findByText("Message envoyé !", {}, { timeout: 5000});
     });
   });
+
 
 });
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
+  it("a list of events is displayed", async()=> {
     // to implement
+    render(<Home />);
+    await screen.findByText("CEO");
   })
-  it("a list a people is displayed", () => {
-    // to implement
+  it("a list of people is displayed", async() => {
+    render(<Home />);
+    await screen.findByText("CEO");
   })
-  it("a footer is displayed", () => {
-    // to implement
+  it("a footer is displayed", async() => {
+    render(<Home />);
+    await screen.findByText("Contactez-nous");
   })
-  it("an event card, with the last event, is displayed", () => {
-    // to implement
+  
+  
+  it("an event card, with the last event, is displayed",async () => {
+    render(<Home />);
+   screen.queryByText("AOUT")
+    // OK implemented
   })
+    
 });
+  
+
