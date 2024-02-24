@@ -87,6 +87,7 @@ describe("When Events is created", () => {
     });
   });
 
+  // scénario 2 du cahier de recette
   describe("and we click on an event", () => {
     it("the event detail is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);

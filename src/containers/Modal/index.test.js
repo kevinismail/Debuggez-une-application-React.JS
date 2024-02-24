@@ -31,7 +31,7 @@ describe("When Modal data is created", () => {
 
     });
   });
-
+// scénario 6 du cahier des recettes
   describe("and a click is triggered to the close button modal", () => {
     it("the content of the modal is hide", async () => {
       render(

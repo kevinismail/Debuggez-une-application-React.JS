@@ -10,6 +10,8 @@ describe("When Events is created", () => {
     await screen.findByText("Personel / Entreprise");
   });
 
+  // scénario 4 du cahier de recettes 
+  
   describe("and a click is triggered on the submit button", () => {
     it("the success action is called", async () => {
       const onSuccess = jest.fn();

@@ -9,7 +9,7 @@ describe("When Menu is created", () => {
     await screen.findByText("Notre équipe");
     await screen.findByText("Contact");
   });
-
+// scénario 5 du cahier des recettes 
   describe("and a click is triggered on contact button", () => {
     it("document location  href change", async () => {
       render(<Menu />);
