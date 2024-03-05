@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Debuggez-une-application-React.JS/static/css/main.ee2a8b22.css",
+    "main.js": "/Debuggez-une-application-React.JS/static/js/main.36003b79.js",
+    "static/js/787.227b7f2b.chunk.js": "/Debuggez-une-application-React.JS/static/js/787.227b7f2b.chunk.js",
+    "index.html": "/Debuggez-une-application-React.JS/index.html",
+    "main.ee2a8b22.css.map": "/Debuggez-une-application-React.JS/static/css/main.ee2a8b22.css.map",
+    "main.36003b79.js.map": "/Debuggez-une-application-React.JS/static/js/main.36003b79.js.map",
+    "787.227b7f2b.chunk.js.map": "/Debuggez-une-application-React.JS/static/js/787.227b7f2b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ee2a8b22.css",
+    "static/js/main.36003b79.js"
+  ]
+}
